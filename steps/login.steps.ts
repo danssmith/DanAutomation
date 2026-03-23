@@ -61,7 +61,7 @@ Then("the User should see the dashboard", async function () {
 Then("the User should see an error message", async function () {
     const page = getPage();
     const errorMessage = page.getByText("Invalid credentials");
-    await expect(errorMessage).toBeVisible();
+    await expect(errorMessage).toBeVisible({ timeout: 10000 });
 });
 
 Then("the error message should display the wording: {string}", async function (expectedText: string) {

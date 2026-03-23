@@ -10,8 +10,8 @@ export class LeavePage {
 
     constructor(private readonly page: Page) {
         this.leaveLink = page.getByRole("link", { name: "Leave" });
-        this.fromDateInput = page.getByText("From Date").locator("../../..").getByPlaceholder("yyyy-dd-mm");
-        this.toDateInput = page.getByText("To Date").locator("../../..").getByPlaceholder("yyyy-dd-mm");
+        this.fromDateInput = page.locator("div.oxd-input-group").filter({ hasText: "From Date" }).getByPlaceholder("yyyy-dd-mm");
+        this.toDateInput = page.locator("div.oxd-input-group").filter({ hasText: "To Date" }).getByPlaceholder("yyyy-dd-mm");
         this.searchButton = page.getByRole("button", { name: "Search" });
         this.resultsTable = page.locator(".oxd-table");
         this.noRecordsMessage = page.getByText("No Records Found");
@@ -22,9 +22,9 @@ export class LeavePage {
     }
 
     async setDateRange(fromDate: string, toDate: string): Promise<void> {
-        await this.fromDateInput.clear();
+        await this.fromDateInput.click({ clickCount: 3 });
         await this.fromDateInput.fill(fromDate);
-        await this.toDateInput.clear();
+        await this.toDateInput.click({ clickCount: 3 });
         await this.toDateInput.fill(toDate);
     }
 
